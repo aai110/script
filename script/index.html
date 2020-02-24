@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <html lang="en">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Good Day</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!--<link rel="stylesheet" href="/resources/demos/style.css">-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+  <!-- <script type="text/javascript" src="jquery.js"></script> -->
+  <script src="jqery-1.02.4.js"></script>
+  <script src="jquery-ui.js"></script>
+  <script src="jquery.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <script type="text/javascript" src="moment.min.js"></script>
+  <script type="text/javascript" src="daterangepicker.min.js"></script>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+  <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+  <!-- Bootstrap Date-Picker Plugin -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="sidenav">
+    <h3>Home</h3>
+    <hr>
+    <a> My Work</a>
+    <a>Notification</a>
+    <a>My Time</a>
+    <a>Recent</a>
+    <hr>
+    <h3>Pinned views</h3>
+    <hr>
+    <a>Activity Stream</a>
+    <a>Calender</a>
+  </div>
+
+  <div class="main">
+    <h2>My Time</h2>
+
+    <div class="container-fluid">
+      <ul class="nav nav-pills">
+        <li><a class="a" data-toggle="tab" href="#menu1">Daily</a></li>
+        <li><a class="a" data-toggle="tab" href="#menu2">Weekly</a></li>
+        <li><a class="a" data-toggle="tab" href="#menu3">Report</a></li>
+      </ul>
+    </div>
+
+    <div class="tab-content">
+      <div id="menu1" class="tab-pane fade">
+        <div class="form-group">
+          <!-- Date input -->
+          <label class="control-label" for="date"></label>
+          <input class="form-control" id="date" name="date" onclick="xyz()" placeholder="MM/DD/YYY" type="text" />
+          <i class="fa fa-calendar" id="fa"></i>
+
+        </div>
+        <table>
+          <tr>
+            <th> active tasks </th>
+            <th>time spent</th>
+          </tr>
+
+        </table>
+
+        <div id="div2" class="table-responsive">
+        </div>
+
+        <button type="button" class="btn">+TimeReport</button>
+      </div>
+
+      <div id="menu2" class="tab-pane fade">
+        <div class="row">
+          <div class="col-lg-2">
+            <input type="week" class="form-control" id="Week" onblur="abc();" />
+          </div>
+        </div>
+
+        <table>
+          <tr>
+            <th> Weekly Status</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+            <th>Sun</th>
+          </tr>
+        </table>
+        <div id="div1" class="table-responsive">  
+       
+        </div>
+        <button type="button" class="btn">+TimeReport</button>
+      </div>
+
+      <div id="menu3" class="tab-pane fade">
+        <div class="calender">
+          <i class="fa fa-calendar" id="calendericon" aria-hidden="true"></i>
+          <div id="startdate"></div>
+          <div id="hyphn"></div>
+          <div id="enddate"></div>
+        </div>
+        <div class="add">
+
+          <body onload="createTable()">
+
+
+            <!--THE CONTAINER WHERE WE'll ADD THE DYNAMIC TABLE-->
+            <div id="cont"></div>
+            <p>
+              <input type="button" class="btn1" id="addRow" value="+TimeReport" onclick="addRow()" />
+            </p>
+            <p><input type="button" class="btn1" id="bt" value="SubmitData" onclick="submit()" /></p>
+          </body>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+</body>
+
+
+
+<script>
+
+
+//range picker
+
+
+
+
+
+  $(document).ready(function () {
+    var date_input = $('input[name="date"]'); //our date input has the name "date"
+    var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+    var options = {
+      format: 'mm/dd/yyyy',
+      container: container,
+      todayHighlight: true,
+      autoclose: true,
+    };
+    date_input.datepicker(options);
+  })
+
+
+
+  // ARRAY FOR HEADER.
+  var arrHead = new Array();
+  arrHead = ['project/task', 'task reported'];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
+
+  // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
+  // ADD THE TABLE TO YOUR WEB PAGE.
+  function createTable() {
+    var empTable = document.createElement('table');
+    empTable.setAttribute('id', 'empTable');            // SET THE TABLE ID.
+
+    var tr = empTable.insertRow(-1);
+
+    for (var h = 0; h < arrHead.length; h++) {
+      var th = document.createElement('th');          // TABLE HEADER.
+      th.innerHTML = arrHead[h];
+      tr.appendChild(th);
+    }
+
+    var div = document.getElementById('cont');
+    div.appendChild(empTable);    // ADD THE TABLE TO YOUR WEB PAGE.
+  }
+
+  // ADD A NEW ROW TO THE TABLE.s
+  function addRow() {
+    var empTab = document.getElementById('empTable');
+
+    var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
+    var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
+    tr = empTab.insertRow(rowCnt);
+
+    for (var c = 0; c < arrHead.length; c++) {
+      var td = document.createElement('td');          // TABLE DEFINITION.
+      td = tr.insertCell(c);
+
+      if (c == 0) {           // FIRST COLUMN.
+        var ele = document.createElement('input');
+        ele.setAttribute('type', 'text');
+        ele.setAttribute('value', '');
+
+        td.appendChild(ele);
+      }
+      else {
+        // CREATE AND ADD TEXTBOX IN EACH CELL.
+        var ele = document.createElement('input');
+        ele.setAttribute('type', 'text');
+        ele.setAttribute('value', '');
+
+        td.appendChild(ele);
+      }
+    }
+  }
+
+  // DELETE TABLE ROW.
+  function removeRow(oButton) {
+    var empTab = document.getElementById('empTable');
+    empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);       // BUTTON -> TD -> TR.
+  }
+
+  // EXTRACT AND SUBMIT TABLE DATA.
+  function submit() {
+    var myTab = document.getElementById('empTable');
+    var values = new Array();
+
+    // LOOP THROUGH EACH ROW OF THE TABLE.
+    for (row = 1; row < myTab.rows.length - 1; row++) {
+      for (c = 0; c < myTab.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
+
+        var element = myTab.rows.item(row).cells[c];
+        if (element.childNodes[0].getAttribute('type') == 'text') {
+          values.push("'" + element.childNodes[0].value + "'");
+        }
+      }
+    }
+
+    // SHOW THE RESULT IN THE CONSOLE WINDOW.
+    console.log(values);
+  }
+
+
+  //Get the value of Start and End of Week
+
+
+
+  $(document).ready(function () {
+    // Add weekpicker
+    if (navigator.userAgent.indexOf("Firefox") != -1 || navigator.userAgent.indexOf("Trident") != -1) {
+      $('#Week').datepicker({
+        calendarWeeks: true,
+        weekStart: 1
+      });
+
+      Date.prototype.getWeek = function () {
+        var onejan = new Date(this.getFullYear(), 0, 1);
+        var today = new Date(this.getFullYear(), this.getMonth(), this.getDate());
+        var dayOfYear = ((today - onejan + 86400000) / 86400000);
+        return Math.ceil(dayOfYear / 7)
+      };
+
+    };
+  });
+
+  var obj =
+    [
+      {
+        id: "1", title: "App migration with rollbase", mon: "7 h: 19 min",
+        tue: "4 h:15 min", wed: "7 h: 19 min", ths: "4 h:15 min"
+        , fri: "7 h: 19 min", sat: "4 h:15 min"
+      },
+
+      {
+        id: "2", title: "migrating the app", mon: "7 h: 19 min",
+        tue: "4 h:15 min", wed: "7 h: 19 min", ths: "4 h:15 min"
+        , fri: "7 h: 19 min", sat: "4 h:15 min"
+      },
+
+      {
+        id: "3", title: "testing rollbase isde functionalities", mon: "7 h: 19 min",
+        tue: "4 h:15 min", wed: "7 h: 19 min", ths: "4 h:15 min"
+        , fri: "7 h: 19 min", sat: "4 h:15 min"
+      },
+
+      {
+        id: "4", title: "Documentation for icons", mon: "7 h: 19 min",
+        tue: "4 h:15 min", wed: "7 h: 19 min", ths: "4 h:15 min"
+        , fri: "7 h: 19 min", sat: "4 h:15 min"
+      },
+
+      {
+        id: "5", title: "container app impprovements", mon: "7 h: 19 min",
+        tue: "4 h:15 min", wed: "7 h: 19 min", ths: "4 h:15 min"
+        , fri: "7 h: 19 min", sat: "4 h:15 min"
+      },
+      {
+        id: "6", title: "migrating the app", mon: "7 h: 19 min",
+        tue: "4 h:15 min", wed: "7 h: 19 min", ths: "4 h:15 min"
+        , fri: "7 h: 19 min", sat: "4 h:15 min"
+      },
+
+      {
+        id: "7", title: "testing rollbase isde functionalities", mon: "7 h: 19 min",
+        tue: "4 h:15 min", wed: "7 h: 19 min", ths: "4 h:15 min"
+        , fri: "7 h: 19 min", sat: "4 h:15 min"
+      },
+
+      {
+        id: "8", title: "Documentation for icons", mon: "7 h: 19 min",
+        tue: "4 h:15 min", wed: "7 h: 19 min", ths: "4 h:15 min"
+        , fri: "7 h: 19 min", sat: "4 h:15 min"
+      },
+
+      {
+        id: "9 ", title: "container app impprovements", mon: "7 h: 19 min",
+        tue: "4 h:15 min", wed: "7 h: 19 min", ths: "4 h:15 min"
+        , fri: "7 h: 19 min", sat: "4 h:15 min"
+      }
+    ];
+
+  // for (var i = 0; i < obj.length; i++) {
+  //   var tr = "<tr>";
+  //   var td1 = "<td>" + obj[i]["title"] + "</td>";
+  //   var td2 = "<td>" + obj[i]["mon"] + "</td>";
+  //   var td3 = "<td>" + obj[i]["tue"] + "</td>";
+  //   var td4 = "<td>" + obj[i]["wed"] + "</td>";
+  //   var td5 = "<td>" + obj[i]["ths"] + "</td>";
+  //   var td6 = "<td>" + obj[i]["fri"] + "</td>";
+  //   var td7 = "<td>" + obj[i]["sat"] + "</td> </tr>";
+  //   $("#div1").append(tr + td1 + td2 + td3 + td4 + td5 + td6 + td7);
+
+  // }
+
+  function xyz() {
+    var dateno = document.getElementById("date").value;
+    console.log(dateno);
+    dateno = "";
+  }
+  function abc() {
+    var weekno = document.getElementById("Week").value;
+    var customweek = weekno.toString().split('-')[1],
+      weekNumber = customweek.toString().split('W0')[1];
+    console.log('week no', weekNumber)
+
+    var tr = "<tr>";
+    var td1 = "<td>" + obj[weekNumber]["title"] + "</td>";
+    var td2 = "<td>" + obj[weekNumber]["mon"] + "</td>";
+    var td3 = "<td>" + obj[weekNumber]["tue"] + "</td>";
+    var td4 = "<td>" + obj[weekNumber]["wed"] + "</td>";
+    var td5 = "<td>" + obj[weekNumber]["ths"] + "</td>";
+    var td6 = "<td>" + obj[weekNumber]["fri"] + "</td>";
+    var td7 = "<td>" + obj[weekNumber]["sat"] + "</td> </tr>";
+    $("#div1").append(tr + td1 + td2 + td3 + td4 + td5 + td6 + td7);
+
+    // console.log('Custom week', customweek)
+    // console.log('week no', weekNumber)
+    // console.log('week', weekno);
+  }
+ 
+
+
+
+
+
+
+
+  var arg =
+    [
+      {
+        id: "1", activetask: "Container App", timespent: "7 h: 19 min",
+      },
+      {
+        id: "2", activetask: "Container App", timespent: "7 h: 19 min",
+      },
+      {
+        id: "3", activetask: "Container App", timespent: "7 h: 19 min",
+      },
+      {
+        id: "4", activetask: "Container App", timespent: "7 h: 19 min",
+      }
+
+    ];
+
+  for (var j = 0; j < arg.length; j++) {
+    var tr = "<tr>";
+    var td1 = "<td>" + arg[j]["activetask"] + "</td>";
+    var td2 = "<td>" + arg[j]["timespent"] + "</td> </tr>";
+    $("#div2").append(tr + td1 + td2);
+
+  }
+
+</script>
+
+
+</html>

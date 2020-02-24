@@ -1,0 +1,154 @@
+body {
+    font-family: "Roboto Slab", sans-serif;
+    display: flex;
+  }
+  #fa {
+    display: block;
+    width: 9%;
+    height: 19px;
+    padding: 10px 24px;
+    font-size: 15px;
+    margin-top: -33%;
+    margin-left: 376%;
+    font-size: 36px;
+}
+#div2{
+  height:60% ;
+  width: 60%;
+  margin-left: 15%;
+  font-size: small;
+}
+
+#div1{
+  height:60% ;
+  width: 60%;
+  margin-left: 15%;
+  font-size: medium;
+}
+  .sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #5A5F83;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: azure;
+    display: block;
+  }
+  .hide{
+    display:none;
+  }
+  .show{
+    display:block;}
+
+  .sidenav a:hover {
+    color: gray;
+  }
+  
+  .main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 20px;
+        padding: 0px 10px;
+    width: 80%;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+  .bootstrap-datetimepicker-widget tr:hover {
+    background-color: #808080;
+}
+h3{
+    color: azure;
+    text-align:center;
+}
+.nav-pills>li>a {
+  margin-top: 5%;
+  border-radius: 24px;
+
+}
+.nav>li>a {
+  position: relative;
+    display: block;
+    padding: 2px 15px;
+}
+.a{
+  background-color: gray;
+  color: #dddddd;
+}
+.calender{
+  margin-top: 3%;
+  margin-left: 41%;
+}
+.datepicker-days > table > tbody > tr:hover {
+  background-color: #808080;
+}
+ 
+.btn{
+  background-color:#5A5F83 ;
+  color: azure;
+  width: 119px;
+    height: 42px;
+    font-size: small;
+    float: right;
+}
+.btn1{
+  background-color:#5A5F83 ;
+  color: azure;
+  width: 119px;
+    height: 42px;
+    font-size: small;
+}
+.tab-content{
+  width: 300px;
+  height: 500px; 
+  width: 100%;
+  margin-top: 100px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+  color: #5A5F83;
+  margin-left: 15%;
+  font-size: medium;
+  margin-top: 2%;
+  text-align: center;
+}
+
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align:center;
+  padding: 8px;
+}
+.nav nav-pills{
+  color: #5A5F83;
+}
+.form-control {
+  display: block;
+  width: 9%;
+  height: 19px;
+  padding: 10px 24px;
+  font-size: 15px;
+
+  margin-top: -33%;
+  margin-left: 269%;
+}
+.form-group{
+  display: block;
+  width: 12%;
+  height: 19px;
+  padding: 10px 24px;
+  font-size: 15px;
+}
